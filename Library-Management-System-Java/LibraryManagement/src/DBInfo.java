@@ -148,4 +148,34 @@ public class DBInfo
 		}
 		return value;
 	}
+	public static StringBuilder borrowlist;
+	public static String getAllBorrowedBookFromUsername(String username) {
+	    Connection con = DBInfo.conn();
+	    borrowlist = new StringBuilder();
+	    try {
+	        String sql = "SELECT bookId, title, author, issueDate, dueDate FROM issueBooks WHERE username = ? AND returnStatus = 'Pending'";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, username);
+	        ResultSet res = ps.executeQuery();
+	        while (res.next()) {
+	            String bookId = res.getString("bookId");
+	            String title = res.getString("title");
+	            String author = res.getString("author");
+	            String issueDate = res.getString("issueDate");
+	            String dueDate = res.getString("dueDate");
+	            
+	            borrowlist.append("Book ID: ").append(bookId).append(", ")
+	                 .append("Title: ").append(title).append(", ")
+	                 .append("Author: ").append(author).append(", ")
+	                 .append("Issue Date: ").append(issueDate).append(", ")
+	                 .append("Due Date: ").append(dueDate).append("\n");
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    System.out.println(borrowlist.toString());
+	    return borrowlist.toString();
+	}
+
 }

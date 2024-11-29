@@ -107,7 +107,7 @@ public class Login extends JFrame {
 					dispose();
 				}
 				if (i==1 && usertype.equalsIgnoreCase("Student")) {
-					StudentPage sp=new StudentPage();
+					StudentPage sp=new StudentPage(username);
 					sp.setVisible(true);
 					dispose();
 				}

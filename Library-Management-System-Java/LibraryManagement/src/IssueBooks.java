@@ -216,6 +216,15 @@ public class IssueBooks extends JFrame {
 						ResultSet res=ps_username.executeQuery();
 						if(res.next())
 						{
+							int booknum = res.getInt("booknum");
+		                    if (booknum <= 0) {
+		                        JOptionPane.showMessageDialog(getParent(), "No books available to issue for this user.", "Limit Reached", JOptionPane.ERROR_MESSAGE);
+		                        return;
+		                    }
+
+		                    if (booknum <= 3) {
+		                        JOptionPane.showMessageDialog(getParent(), "Warning: User is near their borrowing limit.", "Warning", JOptionPane.WARNING_MESSAGE);
+		                    }
 							String sqlId="SELECT * FROM book WHERE bookId=?";
 							PreparedStatement ps_bookId=con.prepareStatement(sqlId);
 							ps_bookId.setString(1, bookId);
@@ -232,15 +241,23 @@ public class IssueBooks extends JFrame {
 									ps.setString(4, author);
 									ps.setString(5, issueDate);
 									ps.setString(6, dueDate);
-									ps.setString(7, "Pending");
-									
+									ps.setString(7, "Pending");									
 									flag=ps.executeUpdate();
+									if (flag > 0) {
+			                            String updateBooknum = "UPDATE registration SET booknum = booknum - 1 WHERE username=?";
+			                            PreparedStatement ps_update = con.prepareStatement(updateBooknum);
+			                            ps_update.setString(1, username);
+			                            ps_update.executeUpdate();
+
+				                        JOptionPane.showMessageDialog(getParent(), "Book Successfully Issued", "Success", JOptionPane.INFORMATION_MESSAGE);
+				                            reset();
+				                     }
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
 								if(flag==0)
 								{
-									JOptionPane.showMessageDialog(getParent(), "Book Already Isuued","Error",JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(getParent(), "Book Already Issued","Error",JOptionPane.ERROR_MESSAGE);
 								}else
 								{
 									JOptionPane.showMessageDialog(getParent(), "Book Successfully Issued","Success",JOptionPane.INFORMATION_MESSAGE);
