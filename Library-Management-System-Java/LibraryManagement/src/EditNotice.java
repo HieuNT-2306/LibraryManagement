@@ -22,6 +22,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+//Xong
+
 public class EditNotice extends JFrame {
 
 	private JPanel contentPane;
@@ -79,7 +81,7 @@ public class EditNotice extends JFrame {
 		textArea.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 13));
 		
 		JButton btnNewButton = new JButton("Cancel");
-		Image cancelIcon=new ImageIcon(this.getClass().getResource("red-x-mark-transparent-background-3.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image cancelIcon=new ImageIcon("img/red-x-mark-transparent-background-3.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton.setIcon(new ImageIcon(cancelIcon));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -90,7 +92,7 @@ public class EditNotice extends JFrame {
 		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnSave = new JButton("Save");
-		Image saveIcon=new ImageIcon(this.getClass().getResource("login.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image saveIcon=new ImageIcon("img/login.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnSave.setIcon(new ImageIcon(saveIcon));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -131,7 +133,7 @@ public class EditNotice extends JFrame {
 		btnSave.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnDelete = new JButton("Delete");
-		Image img=new ImageIcon(this.getClass().getResource("deleteIcon.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image img=new ImageIcon("img/deleteIcon.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnDelete.setIcon(new ImageIcon(img));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 

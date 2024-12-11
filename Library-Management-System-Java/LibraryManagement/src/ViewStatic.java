@@ -79,7 +79,8 @@ public class ViewStatic extends JFrame {
 			String return_sql="SELECT * FROM issueBooks WHERE returnStatus='Submitted'";
 			return_values=new Vector<>();
 			return_cols=new Vector<>();
-			PreparedStatement ps_return=con.prepareStatement(return_sql);
+			//Đã sửa
+			PreparedStatement ps_return=con.prepareStatement(return_sql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			ResultSet res_return=ps_return.executeQuery();
 			ResultSetMetaData rsmd_return=res_return.getMetaData();
 			int countCols=rsmd_return.getColumnCount();
