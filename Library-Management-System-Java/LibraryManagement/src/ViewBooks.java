@@ -73,7 +73,7 @@ public class ViewBooks extends JFrame {
 		comboBox.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnNewButton =  new JButton("Search");
-		Image searchIcon=new ImageIcon(this.getClass().getResource("search.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image searchIcon=new ImageIcon("img/search.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton.setIcon(new ImageIcon(searchIcon));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -119,7 +119,7 @@ public class ViewBooks extends JFrame {
 		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnCancel = new JButton("Cancel");
-		Image cancelIcon=new ImageIcon(this.getClass().getResource("red-x-mark-transparent-background-3.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image cancelIcon=new ImageIcon("img/red-x-mark-transparent-background-3.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnCancel.setIcon(new ImageIcon(cancelIcon));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
