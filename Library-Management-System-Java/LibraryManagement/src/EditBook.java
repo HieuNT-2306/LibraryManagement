@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -42,7 +43,8 @@ public class EditBook extends JFrame {
 	private JTextField textField_8;
 	private JLabel lblNewLabel_1_1_4_1;
 	private JLabel lblNewLabel_1_1_4_1_1;
-	private JComboBox comboBox,comboBox_1,comboBox_2,comboBox_3;
+	//private JComboBox comboBox,comboBox_1,comboBox_2,comboBox_3;
+	private AutoComboBox comboBox,comboBox_1,comboBox_2,comboBox_3;
 
 	/**
 	 * Launch the application.
@@ -352,18 +354,75 @@ public class EditBook extends JFrame {
 		});
 		btnNewButton_1_1_2.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
-		comboBox = new JComboBox(DBInfo.getValue("author"));
+		List<String> authors = DBInfo.getValue("author");
+		AutoComboBox comboBox = new AutoComboBox();
+		String[] authorsArray = authors.toArray(new String[0]);
+		comboBox.setKeyWord(authorsArray);
 		comboBox.setFont(new Font("Verdana", Font.PLAIN, 13));
-		
-		comboBox_1 = new JComboBox(DBInfo.getValue("subject"));
+
+		// Subjects
+		List<String> subjects = DBInfo.getValue("subject");
+		String[] subjectsArray = subjects.toArray(new String[0]);
+		AutoComboBox comboBox_1 = new AutoComboBox();
+		comboBox_1.setKeyWord(subjectsArray);
 		comboBox_1.setFont(new Font("Verdana", Font.PLAIN, 13));
-		
-		comboBox_2 = new JComboBox(DBInfo.getValue("publisher"));
+
+		// Publishers
+		List<String> publishers = DBInfo.getValue("publisher");
+		String[] publishersArray = publishers.toArray(new String[0]);
+		AutoComboBox comboBox_2 = new AutoComboBox();
+		comboBox_2.setKeyWord(publishersArray);
 		comboBox_2.setFont(new Font("Verdana", Font.PLAIN, 13));
-		
-		comboBox_3 = new JComboBox(DBInfo.getValue("category"));
+
+		// Categories
+		List<String> categories = DBInfo.getValue("category");
+		String[] categoriesArray = categories.toArray(new String[0]);
+		AutoComboBox comboBox_3 = new AutoComboBox();
+		comboBox_3.setKeyWord(categoriesArray);
 		comboBox_3.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
+		JButton btn_add_author = new JButton("New");
+		btn_add_author.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btn_add_author.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new AddForm("author").setVisible(true);
+			}
+		});
+		
+		
+		JButton btn_add_subject = new JButton("New");
+		btn_add_subject.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btn_add_subject.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new AddForm("subject").setVisible(true);
+			}
+		});
+		
+		
+		JButton btn_add_publisher = new JButton("New");
+		btn_add_publisher.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btn_add_publisher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new AddForm("publisher").setVisible(true);
+			}
+		});
+		
+		
+		JButton btn_add_category = new JButton("New");
+		btn_add_category.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btn_add_category.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new AddForm("category").setVisible(true);
+			}
+		});
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		
+		
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
@@ -389,13 +448,27 @@ public class EditBook extends JFrame {
 								.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
 								.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
 								.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE))
-							.addGap(60))
+							.addGap(30)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(btn_add_author, Alignment.LEADING)
+										.addComponent(btn_add_subject, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btn_add_publisher, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(btn_add_category, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addGap(30)
+										)
+								)
+							.addGap(30)
+							)			            //add new button
+			            
+						
 						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(91)
+							.addGap(81)
 							.addComponent(btnNewButton_1)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(btnNewButton_1_1)
-							.addGap(37)))
+							.addGap(97)))
+					  
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -444,6 +517,7 @@ public class EditBook extends JFrame {
 							.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 							.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
 							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btn_add_author)
 						.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -451,18 +525,24 @@ public class EditBook extends JFrame {
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblNewLabel_1_1_4_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 							.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btn_add_subject)
+							))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblNewLabel_1_1_4_1_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 							.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-							.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+							.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btn_add_publisher)
+							)
 						.addComponent(lblNewLabel_1_1_3, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel_1_1_4, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+						.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btn_add_category)
+						)
 					.addGap(48)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()

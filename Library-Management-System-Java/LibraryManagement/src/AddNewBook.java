@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -41,7 +42,8 @@ public class AddNewBook extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JComboBox comboBox,comboBox_1,comboBox_2,comboBox_3;
+	//private JComboBox comboBox,comboBox_1,comboBox_2,comboBox_3;
+	private AutoComboBox comboBox,comboBox_1,comboBox_2,comboBox_3;
 	private JLabel lblNewLabel_2;
 
 	/**
@@ -293,17 +295,33 @@ public class AddNewBook extends JFrame {
 		JLabel lblNewLabel_1_1 = new JLabel("Title");
 		lblNewLabel_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
-		comboBox = new JComboBox(DBInfo.getValue("author"));
-		comboBox.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
-		comboBox_1 = new JComboBox(DBInfo.getValue("subject"));
-		comboBox_1.setFont(new Font("Verdana", Font.PLAIN, 13));
-		
-		comboBox_2 = new JComboBox(DBInfo.getValue("publisher"));
-		comboBox_2.setFont(new Font("Verdana", Font.PLAIN, 13));
-		
-		comboBox_3 = new JComboBox(DBInfo.getValue("category"));
-		comboBox_3.setFont(new Font("Verdana", Font.PLAIN, 13));
+	    List<String> authors = DBInfo.getValue("author");
+	    comboBox = new AutoComboBox();
+	    String[] authorsArray = authors.toArray(new String[0]);
+	    comboBox.setKeyWord(authorsArray);
+	    comboBox.setFont(new Font("Verdana", Font.PLAIN, 13));
+
+	    // Subjects
+	    List<String> subjects = DBInfo.getValue("subject");
+	    String[] subjectsArray = subjects.toArray(new String[0]);
+	    AutoComboBox comboBox_1 = new AutoComboBox();
+	    comboBox_1.setKeyWord(subjectsArray);
+	    comboBox_1.setFont(new Font("Verdana", Font.PLAIN, 13));
+
+	    // Publishers
+	    List<String> publishers = DBInfo.getValue("publisher");
+	    String[] publishersArray = publishers.toArray(new String[0]);
+	    AutoComboBox comboBox_2 = new AutoComboBox();
+	    comboBox_2.setKeyWord(publishersArray);
+	    comboBox_2.setFont(new Font("Verdana", Font.PLAIN, 13));
+
+	    // Categories
+	    List<String> categories = DBInfo.getValue("category");
+	    String[] categoriesArray = categories.toArray(new String[0]);
+	    AutoComboBox comboBox_3 = new AutoComboBox();
+	    comboBox_3.setKeyWord(categoriesArray);
+	    comboBox_3.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Author");
 		lblNewLabel_1_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
@@ -431,12 +449,42 @@ public class AddNewBook extends JFrame {
 		
 		JButton btn_add_author = new JButton("New");
 		btn_add_author.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btn_add_author.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new AddForm("author").setVisible(true);
+			}
+		});
+		
+		
 		JButton btn_add_subject = new JButton("New");
 		btn_add_subject.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btn_add_subject.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new AddForm("subject").setVisible(true);
+			}
+		});
+		
+		
 		JButton btn_add_publisher = new JButton("New");
 		btn_add_publisher.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btn_add_publisher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new AddForm("publisher").setVisible(true);
+			}
+		});
+		
+		
 		JButton btn_add_category = new JButton("New");
 		btn_add_category.setFont(new Font("Verdana", Font.PLAIN, 13));
+		btn_add_category.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new AddForm("category").setVisible(true);
+			}
+		});
 		
 	//Waste QR-BarCode;	
 		lblNewLabel_2 = new JLabel("");

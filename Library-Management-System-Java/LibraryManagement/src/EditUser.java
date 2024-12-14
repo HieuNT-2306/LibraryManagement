@@ -24,10 +24,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EditUser extends JFrame {
-
+public class EditUser extends JFrame { 
+	//yuot kqws upxn fgip
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textField; 
 	private JTextField textField_1;
 	private JTextField textField_2;
 
