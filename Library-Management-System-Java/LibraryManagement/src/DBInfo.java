@@ -49,6 +49,29 @@
 	
 			return v;
 		}
+		
+		
+		public static Vector<String> getTitleValue(String name) 
+		{
+			Vector<String> v=new Vector<>();
+			v.add("Select");
+			Connection con=DBInfo.conn();
+			String query="SELECT * FROM "+name+" ORDER BY TITLE	";
+			try {
+				PreparedStatement ps=con.prepareStatement(query);
+				ResultSet res=ps.executeQuery();
+				while(res.next()) 
+				{
+					String values=res.getString(2);
+					v.add(values);
+					//System.out.println(v);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			return v;
+		}
 		public static Vector<Vector> outerVector;
 		public static Vector colsName;
 		public static void allBooks() throws SQLException 
