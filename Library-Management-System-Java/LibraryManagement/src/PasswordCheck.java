@@ -1,21 +1,27 @@
-import java.awt.*;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.swing.*;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
-
-
-//Xong
 
 public class PasswordCheck extends JFrame {
 
@@ -44,120 +50,39 @@ public class PasswordCheck extends JFrame {
 	 * Create the frame.
 	 */
 	public PasswordCheck() {
-		setTitle("Log In");
+		setTitle("Credentials' Verification");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 500, 400);
+		setBounds(100, 100, 450, 359);
 		setLocationRelativeTo(this);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBackground(Color.white);
+
 		setContentPane(contentPane);
-
-		// Panel trung tâm chứa Welcome và form
-		JPanel headerPanel = new JPanel(new BorderLayout());
-		headerPanel.setBackground(Color.white);
-
-		JLabel libraryLogo = new JLabel("");
-		Image img=new ImageIcon("img/icons8-library-70.png").getImage();
-		libraryLogo.setIcon(new ImageIcon(img));
-		libraryLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		headerPanel.add(libraryLogo,BorderLayout.NORTH);
-
-		JLabel labelWelcome = new JLabel("Welcome Library Management System!");
-		labelWelcome.setFont(new Font("Roboto", Font.BOLD, 20));
-		labelWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		headerPanel.add(labelWelcome,BorderLayout.SOUTH);
-
-		// Phần thông tin đăng nhập
-		JPanel centerPanel = new JPanel(new GridBagLayout());
-		centerPanel.setBackground(Color.white);
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.insets = new Insets(10, 10, 10, 10);
-
-		JLabel usernameLogo = new JLabel();
-		ImageIcon userIcon = new ImageIcon("img/icons8-username-30.png");
-		Image scaledUserIcon = userIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-		usernameLogo.setIcon(new ImageIcon(scaledUserIcon));
-		gbc.gridx = 0; gbc.gridy = 0;
-		centerPanel.add(usernameLogo, gbc);
-
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		Image logoImg=new ImageIcon(this.getClass().getResource("logo.jpg")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(logoImg));
+		
+		JLabel lblNewLabel_1 = new JLabel("Authenticating the credentials");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Verdana", Font.BOLD, 16));
+		
 		textField = new JTextField();
-		textField.setFont(new Font("Roboto", Font.PLAIN, 15));
-		textField.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK),
-				"Username",
-				TitledBorder.LEFT,
-				TitledBorder.TOP,
-				new Font("Arial", Font.PLAIN, 14),
-				Color.GRAY
-		));
-		textField.setColumns(20);
-		gbc.gridx = 1; gbc.gridy = 0;
-		centerPanel.add(textField, gbc);
-
-		JLabel passwordLogo = new JLabel();
-		ImageIcon passwordIcon = new ImageIcon("img/icons8-password-30.png");
-		Image scaledPassIcon = passwordIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-		passwordLogo.setIcon(new ImageIcon(scaledPassIcon));
-		gbc.gridx = 0; gbc.gridy = 1;
-		centerPanel.add(passwordLogo, gbc);
-
+		textField.setFont(new Font("Verdana", Font.PLAIN, 13));
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_3_1_1_1 = new JLabel("username");
+		lblNewLabel_3_1_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Roboto", Font.PLAIN, 15));
-		passwordField.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK),
-				"Password",
-				TitledBorder.LEFT,
-				TitledBorder.TOP,
-				new Font("Arial", Font.PLAIN, 14),
-				Color.GRAY
-		));
-		passwordField.setColumns(20);
-		gbc.gridx = 1; gbc.gridy = 1;
-		centerPanel.add(passwordField, gbc);
-
-		// JCheckBox Show/Hide Password
-		ImageIcon hideIcon = new ImageIcon("img/icons8-hide-password-30.png");
-		ImageIcon showIcon = new ImageIcon("img/icons8-show-password-30.png");
-
-		JButton showPassButton = new JButton(hideIcon);
-		showPassButton.setFocusPainted(false);
-		showPassButton.setBorderPainted(false);
-		showPassButton.setContentAreaFilled(false);
-		// Bắt sự kiện bấm nút
-		showPassButton.addActionListener(new ActionListener() {
-			private boolean isHidden = true;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (isHidden) {
-					passwordField.setEchoChar((char) 0); // Hiện mật khẩu
-					showPassButton.setIcon(showIcon);
-				} else {
-					passwordField.setEchoChar('*'); // Ẩn mật khẩu
-					showPassButton.setIcon(hideIcon);
-				}
-				isHidden = !isHidden;
-			}
-		});
-		gbc.gridx = 3;
-		gbc.gridy = 1;
-		centerPanel.add(showPassButton,gbc);
-
-		JPanel buttonPanel = new JPanel(new BorderLayout());
-		buttonPanel.setBackground(Color.white);
-
-		JPanel buttonLogin = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		buttonLogin.setBackground(Color.white);
-		JButton btnNewButton = new JButton("Log In");
-		btnNewButton.setPreferredSize(new Dimension(100,30));
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		btnNewButton.setBorderPainted(false);  // Tắt viền nút
-		btnNewButton.setFocusPainted(false);   // Tắt viền khi có focus
-		btnNewButton.setHorizontalAlignment(SwingConstants.CENTER);
-		buttonLogin.add(btnNewButton);
-		buttonPanel.add(buttonLogin,BorderLayout.NORTH);
+		passwordField.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
+		JLabel lblNewLabel_3_1_1_1_1 = new JLabel("Password");
+		lblNewLabel_3_1_1_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
+		JButton btnNewButton = new JButton("Save");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -206,53 +131,72 @@ public class PasswordCheck extends JFrame {
 				}
 			}
 		});
-
-		JPanel cancelPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		cancelPanel.setBackground(Color.white);
-
+		Image saveIcon=new ImageIcon(this.getClass().getResource("login.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		btnNewButton.setIcon(new ImageIcon(saveIcon));
+		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 14));
+		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBorderPainted(false);
-		btnCancel.setFocusPainted(false);
-		btnCancel.setContentAreaFilled(false);
-		btnCancel.setFont(new Font("Roboto",Font.PLAIN,15));
-		btnCancel.setForeground(Color.BLACK);  // Màu chữ ban đầu
-
-		// Thay đổi màu văn bản khi di chuột qua nút
-		btnCancel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btnCancel.setForeground(Color.BLUE);  // Màu chữ khi di chuột
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btnCancel.setForeground(Color.BLACK);  // Trả lại màu chữ khi không di chuột
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				btnCancel.setForeground(Color.RED);   // Màu chữ khi bấm
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				btnCancel.setForeground(Color.BLUE);  // Màu chữ khi thả nút
-			}
-		});
+		Image img=new ImageIcon(this.getClass().getResource("red-x-mark-transparent-background-3.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		btnCancel.setIcon(new ImageIcon(img));
 		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
+			public void actionPerformed(ActionEvent e) 
 			{
 				setVisible(false);
 			}
 		});
-		cancelPanel.add(btnCancel);
-		buttonPanel.add(cancelPanel,BorderLayout.CENTER);
-
-		BorderLayout boderLayout = new BorderLayout(5,5);
-		contentPane.setLayout(boderLayout);
-		contentPane.add(headerPanel,BorderLayout.NORTH);
-		contentPane.add(centerPanel,BorderLayout.CENTER);
-		contentPane.add(buttonPanel,BorderLayout.SOUTH);
+		btnCancel.setFont(new Font("Verdana", Font.PLAIN, 14));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(58)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblNewLabel_3_1_1_1_1, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblNewLabel_3_1_1_1, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnNewButton))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textField, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(59)
+									.addComponent(btnCancel)))
+							.addGap(51))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+							.addContainerGap())))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+					.addGap(33)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_3_1_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
+					.addGap(26)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_3_1_1_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnCancel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+					.addGap(24))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 
 }

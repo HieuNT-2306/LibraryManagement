@@ -24,10 +24,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EditUser extends JFrame { 
-	//yuot kqws upxn fgip
+public class EditUser extends JFrame {
+
 	private JPanel contentPane;
-	private JTextField textField; 
+	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 
@@ -68,7 +68,7 @@ public class EditUser extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("");
-		Image logo=new ImageIcon("img/logo.jpg").getImage();
+		Image logo=new ImageIcon(this.getClass().getResource("logo.jpg")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(logo));
 		JLabel lblNewLabel_1 = new JLabel("Delete User");
 		lblNewLabel_1.setFont(new Font("Verdana", Font.BOLD, 16));
@@ -129,7 +129,7 @@ public class EditUser extends JFrame {
 		lblNewLabel_3_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnUpdate = new JButton("Search");
-		Image searchIcon=new ImageIcon("img/search.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image searchIcon=new ImageIcon(this.getClass().getResource("search.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnUpdate.setIcon(new ImageIcon(searchIcon));
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -163,7 +163,7 @@ public class EditUser extends JFrame {
 		btnUpdate.setFont(new Font("Verdana", Font.PLAIN, 14));
 		
 		JButton btnCancel = new JButton("Cancel");
-		Image cancelIcon=new ImageIcon("img/red-x-mark-transparent-background-3.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image cancelIcon=new ImageIcon(this.getClass().getResource("red-x-mark-transparent-background-3.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnCancel.setIcon(new ImageIcon(cancelIcon));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -174,7 +174,7 @@ public class EditUser extends JFrame {
 		btnCancel.setFont(new Font("Verdana", Font.PLAIN, 14));
 		
 		JButton btnDelete = new JButton("Delete");
-		Image deleteIcon=new ImageIcon("img/deleteIcon.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image deleteIcon=new ImageIcon(this.getClass().getResource("deleteIcon.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnDelete.setIcon(new ImageIcon(deleteIcon));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 

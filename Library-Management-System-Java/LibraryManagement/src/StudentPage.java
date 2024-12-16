@@ -25,7 +25,7 @@ public class StudentPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentPage frame = new StudentPage("student");
+					StudentPage frame = new StudentPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +37,7 @@ public class StudentPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StudentPage(String username) {
+	public StudentPage() {
 		setTitle("Student Page");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -48,11 +48,11 @@ public class StudentPage extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(3, 3, 0, 0));
-		Image img=new ImageIcon("img/member-add-on-300x300.png").getImage();
+		Image img=new ImageIcon(this.getClass().getResource("/member-add-on-300x300.png")).getImage();
 		
 		JLabel lblNewLabel_1 = new JLabel();
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		Image img01=new ImageIcon("img/logoMain.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+		Image img01=new ImageIcon(this.getClass().getResource("logoMain.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		lblNewLabel_1.setIcon(new ImageIcon(img01));
 		contentPane.add(lblNewLabel_1);
 		
@@ -71,17 +71,7 @@ public class StudentPage extends JFrame {
 		{
 			value="";
 		}
-		value+= "\n\nHello ";
-		value+= username +",";
-		String borrowed = DBInfo.getAllBorrowedBookFromUsername(username);
-		String list = DBInfo.borrowlist.toString();
-		if (list != "") {
-			value += "\nYou need to return all of these books before the deadline:\n\n";
-			value += list;
-			value += "\nOr else, your account might be deactivated!";
-		} else {
-			value += "\nYou haven't borrowed any books!";
-		}
+		
 		JTextArea textArea = new JTextArea(value);
 		textArea.setForeground(Color.RED);
 		textArea.setWrapStyleWord(true);
@@ -90,9 +80,9 @@ public class StudentPage extends JFrame {
 		textArea.setBackground(new Color(240, 240, 240));
 		textArea.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 13));
 		contentPane.add(textArea);
-		Image img1=new ImageIcon("img/New book.png").getImage();
-		Image img2=new ImageIcon("img/download.png").getImage();
-		Image img3=new ImageIcon("img/issue.png").getImage();
+		Image img1=new ImageIcon(this.getClass().getResource("/New book.png")).getImage();
+		Image img2=new ImageIcon(this.getClass().getResource("download.png")).getImage();
+		Image img3=new ImageIcon(this.getClass().getResource("issue.png")).getImage();
 		
 		JButton btnNewButton = new JButton("View Books");
 		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 15));
@@ -102,7 +92,7 @@ public class StudentPage extends JFrame {
 				new ViewBooks().setVisible(true);
 			}
 		});
-		Image viewBooksImg=new ImageIcon("img/viewBooks.png").getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+		Image viewBooksImg=new ImageIcon(this.getClass().getResource("viewBooks.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		btnNewButton.setIcon(new ImageIcon(viewBooksImg));
 		contentPane.add(btnNewButton);
 		
@@ -113,7 +103,7 @@ public class StudentPage extends JFrame {
 				new ViewNotice().setVisible(true);
 			}
 		});
-		Image viewNoticeImg=new ImageIcon("img/notice.png").getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+		Image viewNoticeImg=new ImageIcon(this.getClass().getResource("notice.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		btnNewButton_4.setIcon(new ImageIcon(viewNoticeImg));
 		btnNewButton_4.setFont(new Font("Verdana", Font.PLAIN, 15));
 		contentPane.add(btnNewButton_4);
@@ -126,7 +116,7 @@ public class StudentPage extends JFrame {
 			}
 		});
 		btnNewButton_8.setFont(new Font("Verdana", Font.PLAIN, 15));
-		Image issueImg=new ImageIcon("img/issue.png").getImage();
+		Image issueImg=new ImageIcon(this.getClass().getResource("issue.png")).getImage();
 		btnNewButton_8.setIcon(new ImageIcon(issueImg));
 		contentPane.add(btnNewButton_8);
 		
@@ -137,7 +127,7 @@ public class StudentPage extends JFrame {
 				new ReturnBook().setVisible(true);
 			}
 		});
-		Image img10=new ImageIcon("img/return-book-1-560407.png").getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+		Image img10=new ImageIcon(this.getClass().getResource("return-book-1-560407.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		btnNewButton_3.setIcon(new ImageIcon(img10));
 		btnNewButton_3.setFont(new Font("Verdana", Font.PLAIN, 15));
 		contentPane.add(btnNewButton_3);
@@ -149,7 +139,7 @@ public class StudentPage extends JFrame {
 				new StudentStatic().setVisible(true);
 			}
 		});
-		Image viewStatic=new ImageIcon("img/Statics.png").getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+		Image viewStatic=new ImageIcon(this.getClass().getResource("Statics.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 		btnNewButton_3_2.setIcon(new ImageIcon(viewStatic));
 		btnNewButton_3_2.setFont(new Font("Verdana", Font.PLAIN, 15));
 		contentPane.add(btnNewButton_3_2);
@@ -161,7 +151,7 @@ public class StudentPage extends JFrame {
 				new PasswordCheck().setVisible(true);
 			}
 		});
-		Image img5=new ImageIcon("img/setting.png").getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+		Image img5=new ImageIcon(this.getClass().getResource("setting.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		btnNewButton_3_1.setIcon(new ImageIcon(img5));
 		btnNewButton_3_1.setFont(new Font("Verdana", Font.PLAIN, 15));
 		contentPane.add(btnNewButton_3_1);

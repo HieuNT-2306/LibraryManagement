@@ -82,7 +82,7 @@ public class ReturnBook extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("");
-		Image clgLogo=new ImageIcon("img/logo.jpg").getImage();
+		Image clgLogo=new ImageIcon(this.getClass().getResource("logo.jpg")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(clgLogo));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -224,10 +224,6 @@ public class ReturnBook extends JFrame {
 									JOptionPane.showMessageDialog(getParent(), "Book cannot be returned, contact the librarian.","Error",JOptionPane.ERROR_MESSAGE);
 								}else
 								{
-									String updateBooknum = "UPDATE registration SET booknum = booknum + 1 WHERE username=?";	
-		                            PreparedStatement ps_update = con.prepareStatement(updateBooknum);
-		                            ps_update.setString(1, username);
-		                            ps_update.executeUpdate();
 									JOptionPane.showMessageDialog(getParent(), "Book Successfully Returned","Success",JOptionPane.INFORMATION_MESSAGE);
 									reset();
 								}
