@@ -25,7 +25,7 @@ public class StudentPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentPage frame = new StudentPage();
+					StudentPage frame = new StudentPage("student");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +37,7 @@ public class StudentPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StudentPage() {
+	public StudentPage(String username) {
 		setTitle("Student Page");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -71,7 +71,17 @@ public class StudentPage extends JFrame {
 		{
 			value="";
 		}
-		
+		value+= "\n\nHello ";
+		value+= username +",";
+		String borrowed = DBInfo.getAllBorrowedBookFromUsername(username);
+		String list = DBInfo.borrowlist.toString();
+		if (list != "") {
+			value += "\nYou need to return all of these books before the deadline:\n\n";
+			value += list;
+			value += "\nOr else, your account might be deactivated!";
+		} else {
+			value += "\nYou haven't borrowed any books!";
+		}
 		JTextArea textArea = new JTextArea(value);
 		textArea.setForeground(Color.RED);
 		textArea.setWrapStyleWord(true);

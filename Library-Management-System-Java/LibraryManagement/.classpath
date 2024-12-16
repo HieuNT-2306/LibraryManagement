@@ -11,5 +11,7 @@
 	<classpathentry kind="lib" path="I:/BTBK/CNPM_TNH/Dependencies/core-3.3.0.jar"/>
 	<classpathentry kind="lib" path="I:/BTBK/CNPM_TNH/Dependencies/javase-3.3.0.jar"/>
 	<classpathentry kind="lib" path="I:/BTBK/CNPM_TNH/Dependencies/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="I:/BTBK/CNPM_TNH/Dependencies/jakarta.mail-2.0.1.jar"/>
+	<classpathentry kind="lib" path="I:/BTBK/CNPM_TNH/Dependencies/jakarta.activation-api-2.1.3.jar"/>
 	<classpathentry kind="output" path="bin"/>/
 </classpath>

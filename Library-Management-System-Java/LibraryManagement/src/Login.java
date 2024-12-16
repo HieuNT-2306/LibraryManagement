@@ -189,14 +189,14 @@ public class Login extends JFrame {
 					ap.setVisible(true);
 					dispose();
 				}
-				if (i==1 && usertype.equalsIgnoreCase("Faculty"))
+        if (i==1 && usertype.equalsIgnoreCase("Faculty"))
 				{
 					FacultyPage fp =new FacultyPage() ;
 					fp.setVisible(true);
 					dispose();
 				}
 				if (i==1 && usertype.equalsIgnoreCase("Student")) {
-					StudentPage sp = new StudentPage();
+					StudentPage sp=new StudentPage(username);
 					sp.setVisible(true);
 					dispose();
 				}

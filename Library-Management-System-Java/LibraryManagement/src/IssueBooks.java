@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -37,8 +38,9 @@ public class IssueBooks extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JComboBox comboBox;
+	//private JTextField textField_1;
+	private AutoComboBox textField_1;
+	private JTextField comboBox;
 	private JTextField textField_2;
 	private JDateChooser dateChooser;
 	private SimpleDateFormat dFormate;
@@ -68,14 +70,51 @@ public class IssueBooks extends JFrame {
 	public void reset()
 	{
 		textField.setText(null);
-		textField_1.setText(null);
+		//textField_1.setText(null);
+		textField_1.setSelectedIndex(0);
 		textField_2.setText(null);
-		comboBox.setSelectedIndex(0);
+		comboBox.setText(null);
 		textField_3.setText(date);
 		dateChooser.setCalendar(null);
 		textField_1.setEditable(true);
 		comboBox.setEnabled(true);
 	}
+	
+	  private void populateAuthorName() {
+	        String selectedTitle = (String) textField_1.getSelectedItem();
+	        if (selectedTitle == null || selectedTitle.isEmpty()) return;
+
+	        Connection con = DBInfo.conn();
+	        String query = "SELECT author FROM book WHERE title = ?";
+	        try (PreparedStatement ps = con.prepareStatement(query)) {
+	            ps.setString(1, selectedTitle);
+	            ResultSet rs = ps.executeQuery();
+	            if (rs.next()) {
+	            	comboBox.setText(rs.getString("author"));
+	            } else {
+	            	comboBox.setText("");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	  private String getUserEmail(String username) {
+		    if (username == null || username.isEmpty()) return "testemail@gmail.com";
+		    Connection con = DBInfo.conn();
+		    String query = "SELECT email FROM registration WHERE username = ?";
+		    try (PreparedStatement ps = con.prepareStatement(query)) {
+		        ps.setString(1, username);
+		        ResultSet rs = ps.executeQuery();
+		        if (rs.next()) {
+		            return rs.getString("email");
+		        } else {
+		            return "Can't find any email";
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        return "error";
+		    }
+		}
 	public IssueBooks() {
 		setTitle("Issue Book");
 		setResizable(false);
@@ -127,8 +166,10 @@ public class IssueBooks extends JFrame {
 						String author=res.getString(3);
 						
 						textField.setText(id);
-						textField_1.setText(title);
-						comboBox.setSelectedItem(author);
+						//textField_1.setText(title);
+						textField_1.setSelectedItem(title);
+						//comboBox.setText(null);
+						populateAuthorName();
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -147,12 +188,27 @@ public class IssueBooks extends JFrame {
 		textField.setFont(new Font("Verdana", Font.PLAIN, 13));
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
+//		textField_1 = new JTextField();
+//		textField_1.setFont(new Font("Verdana", Font.PLAIN, 13));
+//		textField_1.setColumns(10);
+		List<String> bookTitles = DBInfo.getTitleValue("book");
+		String[] bookArray = bookTitles.toArray(new String[0]);
+		textField_1 = new AutoComboBox();
+		textField_1.setKeyWord(bookArray);
 		textField_1.setFont(new Font("Verdana", Font.PLAIN, 13));
-		textField_1.setColumns(10);
 		
-		comboBox = new JComboBox(DBInfo.getValue("author"));
+		textField_1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                populateAuthorName();
+            }
+        });
+
+		comboBox = new JTextField();
 		comboBox.setFont(new Font("Verdana", Font.PLAIN, 13));
+		comboBox.setColumns(10);
+		comboBox.setEditable(false);
+
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Book Title");
 		lblNewLabel_3_1.setFont(new Font("Verdana", Font.PLAIN, 13));
@@ -183,14 +239,15 @@ public class IssueBooks extends JFrame {
 		JButton btnIssue = new JButton("Issue");
 		Image issueIcon=new ImageIcon("img/issue book.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnIssue.setIcon(new ImageIcon(issueIcon));
+		
 		btnIssue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
 				SimpleDateFormat dFormate=new SimpleDateFormat("dd-MM-yyyy");
 				String username=textField_2.getText();
 				String bookId=textField.getText();
-				String title=textField_1.getText();
-				String author=comboBox.getSelectedItem().toString();
+				String title=textField_1.getSelectedItem().toString();
+				String author=comboBox.getText();
 				String issueDate=textField_3.getText();
 				String dueDate=dFormate.format(dateChooser.getDate());
 				System.out.println("Due Date "+dueDate);
@@ -216,6 +273,15 @@ public class IssueBooks extends JFrame {
 						ResultSet res=ps_username.executeQuery();
 						if(res.next())
 						{
+							int booknum = res.getInt("booknum");
+		                    if (booknum <= 0) {
+		                        JOptionPane.showMessageDialog(getParent(), "No books available to issue for this user.", "Limit Reached", JOptionPane.ERROR_MESSAGE);
+		                        return;
+		                    }
+
+		                    if (booknum <= 3) {
+		                        JOptionPane.showMessageDialog(getParent(), "Warning: User is near their borrowing limit.", "Warning", JOptionPane.WARNING_MESSAGE);
+		                    }
 							String sqlId="SELECT * FROM book WHERE bookId=?";
 							PreparedStatement ps_bookId=con.prepareStatement(sqlId);
 							ps_bookId.setString(1, bookId);
@@ -232,15 +298,25 @@ public class IssueBooks extends JFrame {
 									ps.setString(4, author);
 									ps.setString(5, issueDate);
 									ps.setString(6, dueDate);
-									ps.setString(7, "Pending");
-									
+									ps.setString(7, "Pending");									
 									flag=ps.executeUpdate();
+									if (flag > 0) {
+			                            String updateBooknum = "UPDATE registration SET booknum = booknum - 1 WHERE username=?";
+			                            PreparedStatement ps_update = con.prepareStatement(updateBooknum);
+			                            ps_update.setString(1, username);
+			                            ps_update.executeUpdate();
+			                            String email = getUserEmail(username);
+			                            SimpleEmailSender emailSender = new SimpleEmailSender("adamlavie2369@gmail.com", "");
+			                            emailSender.sendEmail(email, username, title, author, dueDate);
+				                        JOptionPane.showMessageDialog(getParent(), "Book Successfully Issued, sending confirmation email to: " + email, "Success", JOptionPane.INFORMATION_MESSAGE);
+				                            reset();
+				                     }
 								} catch (SQLException e1) {
 									e1.printStackTrace();
 								}
 								if(flag==0)
 								{
-									JOptionPane.showMessageDialog(getParent(), "Book Already Isuued","Error",JOptionPane.ERROR_MESSAGE);
+									JOptionPane.showMessageDialog(getParent(), "Book Already Issued","Error",JOptionPane.ERROR_MESSAGE);
 								}else
 								{
 									JOptionPane.showMessageDialog(getParent(), "Book Successfully Issued","Success",JOptionPane.INFORMATION_MESSAGE);
