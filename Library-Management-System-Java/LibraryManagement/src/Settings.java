@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -7,18 +7,15 @@ import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-//Xong
+import java.awt.Color;
 
 public class Settings extends JFrame {
 
@@ -47,62 +44,34 @@ public class Settings extends JFrame {
 	public Settings() {
 		setResizable(false);
 		setTitle("Setting");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 500,500);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 414, 460);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBackground(Color.white);
+
 		setContentPane(contentPane);
-
-		lblNewLabel = new JLabel("Id Number");
-		lblNewLabel.setForeground(new Color(240, 240, 240));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 13));
-
 		
-		JLabel settingIconLabel = new JLabel();
-		Image settingLogo = new ImageIcon("img/icons8-setting-50.png").getImage();
-		settingIconLabel.setIcon(new ImageIcon(settingLogo));
-		settingIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-		JPanel buttonPanel = new JPanel(new GridBagLayout());
-		buttonPanel.setBackground(Color.white);
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = GridBagConstraints.RELATIVE;
-		gbc.anchor = GridBagConstraints.CENTER;
-		gbc.insets = new Insets(10,0,10,0);
-
-		ImageIcon iconEditProfile = new ImageIcon(new ImageIcon("img/user-profile_5003738 (2).png").getImage().getScaledInstance(32,32,Image.SCALE_SMOOTH));
-		JButton editProfileButton = new JButton("Edit Profile",iconEditProfile);
-		editProfileButton.setBackground(Color.GREEN);
-		editProfileButton.setPreferredSize(new Dimension(200,40));
-		editProfileButton.setBorderPainted(false);
-		editProfileButton.setFocusPainted(false);
-		editProfileButton.setHorizontalTextPosition(SwingConstants.RIGHT);
-		editProfileButton.setVerticalTextPosition(SwingConstants.CENTER);
-		editProfileButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		JLabel lblNewLabel_1 = new JLabel("Settings");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Verdana", Font.BOLD, 16));
+		
+		JButton btnNewButton = new JButton("Edit Profile");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
 				String id=lblNewLabel.getText();
 				EditProfile editProfile=new EditProfile();
 				editProfile.lblNewLabel_3_2_1.setText(id);
 				editProfile.setVisible(true);
 			}
 		});
-		buttonPanel.add(editProfileButton,gbc);
-
-		ImageIcon iconChangePass = new ImageIcon(new ImageIcon("img/reset-password_11135322.png").getImage().getScaledInstance(32,32,Image.SCALE_SMOOTH));
-		JButton changePassButton = new JButton("Change Password",iconChangePass);
-		changePassButton.setBackground(Color.GREEN);
-		changePassButton.setPreferredSize(new Dimension(200,40));
-		changePassButton.setBorderPainted(false);
-		changePassButton.setFocusPainted(false);
-		changePassButton.setHorizontalTextPosition(SwingConstants.RIGHT);
-		changePassButton.setVerticalTextPosition(SwingConstants.CENTER);
-		changePassButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
+		Image editProfileImg=new ImageIcon(this.getClass().getResource("edit_profile.png")).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+		btnNewButton.setIcon(new ImageIcon(editProfileImg));
+		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
+		JButton btnNewButton_1 = new JButton("Change Password");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
 			{
 				String id=lblNewLabel.getText();
 				ChangePassword changePassword=new ChangePassword();
@@ -110,18 +79,27 @@ public class Settings extends JFrame {
 				changePassword.setVisible(true);
 			}
 		});
-		buttonPanel.add(changePassButton,gbc);
-
-		ImageIcon deleteUserIcon = new ImageIcon(new ImageIcon("img/icons8-delete-user-32.png").getImage().getScaledInstance(32,32,Image.SCALE_SMOOTH));
-		JButton deleteUserButton = new JButton("Delete User",deleteUserIcon);
-		deleteUserButton.setBackground(Color.GREEN);
-		deleteUserButton.setPreferredSize(new Dimension(200,40));
-		deleteUserButton.setBorderPainted(false);
-		deleteUserButton.setFocusPainted(false);
-		deleteUserButton.setHorizontalTextPosition(SwingConstants.RIGHT);
-		deleteUserButton.setVerticalTextPosition(SwingConstants.CENTER);
-		deleteUserButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
+		Image clgLogo=new ImageIcon(this.getClass().getResource("pass_change.png")).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+		btnNewButton_1.setIcon(new ImageIcon(clgLogo));
+		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
+		JButton btnNewButton_2 = new JButton("Change Account");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				String id=lblNewLabel.getText();
+				ChangeUserAccount cua=new ChangeUserAccount();
+				cua.lblNewLabel.setText(id);
+				cua.setVisible(true);
+			}
+		});
+		Image accountChangeImg=new ImageIcon(this.getClass().getResource("acc_change.png")).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+		btnNewButton_2.setIcon(new ImageIcon(accountChangeImg));
+		btnNewButton_2.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
+		JButton btnNewButton_3 = new JButton("Delete User");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
 			{
 				String id=lblNewLabel.getText();
 				DeleteUser deleteUser=new DeleteUser();
@@ -129,48 +107,52 @@ public class Settings extends JFrame {
 				deleteUser.setVisible(true);
 			}
 		});
-		buttonPanel.add(deleteUserButton,gbc);
-
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBorderPainted(false);
-		btnCancel.setFocusPainted(false);
-		btnCancel.setContentAreaFilled(false);
-		btnCancel.setFont(new Font("Roboto",Font.PLAIN,15));
-		btnCancel.setForeground(Color.BLACK);  // Màu chữ ban đầu
-
-		// Thay đổi màu văn bản khi di chuột qua nút
-		btnCancel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btnCancel.setForeground(Color.BLUE);  // Màu chữ khi di chuột
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btnCancel.setForeground(Color.BLACK);  // Trả lại màu chữ khi không di chuột
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				btnCancel.setForeground(Color.RED);   // Màu chữ khi bấm
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				btnCancel.setForeground(Color.BLUE);  // Màu chữ khi thả nút
-			}
-		});
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				setVisible(false);
-			}
-		});
-		buttonPanel.add(btnCancel,gbc);
-
-		contentPane.setLayout(new BorderLayout(10,10));
-		contentPane.add(settingIconLabel,BorderLayout.NORTH);
-		contentPane.add(buttonPanel,BorderLayout.CENTER);
-
+		Image deleteUserImg=new ImageIcon(this.getClass().getResource("deleteUser.png")).getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+		btnNewButton_3.setIcon(new ImageIcon(deleteUserImg));
+		btnNewButton_3.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
+		lblNewLabel = new JLabel("Id Number");
+		lblNewLabel.setForeground(new Color(240, 240, 240));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 13));
+		
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(91)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel)))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(5)
+					.addComponent(lblNewLabel)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+					.addGap(48)
+					.addComponent(btnNewButton)
+					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+					.addComponent(btnNewButton_1)
+					.addGap(27)
+					.addComponent(btnNewButton_2)
+					.addGap(27)
+					.addComponent(btnNewButton_3)
+					.addGap(40))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 }

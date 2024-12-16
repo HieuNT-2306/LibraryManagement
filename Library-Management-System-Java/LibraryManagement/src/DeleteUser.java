@@ -1,8 +1,9 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -18,8 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-//Xong
 
 public class DeleteUser extends JFrame {
 
@@ -56,57 +55,33 @@ public class DeleteUser extends JFrame {
 		setLocationRelativeTo(this);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBackground(Color.white);
+
 		setContentPane(contentPane);
 		
 		lblNewLabel = new JLabel("Student Id Number");
 		lblNewLabel.setForeground(new Color(240, 240, 240));
-
-		JPanel headPanel = new JPanel(new BorderLayout());
-		headPanel.setBackground(Color.white);
-
-		JLabel labelDeleteUser = new JLabel("");
-		labelDeleteUser.setHorizontalAlignment(SwingConstants.CENTER);
-		Image logoDeleteUser = new ImageIcon("img/icons8-delete-user-66.png").getImage();
-		labelDeleteUser.setIcon(new ImageIcon(logoDeleteUser));
-		headPanel.add(labelDeleteUser,BorderLayout.CENTER);
-
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		Image logoImg=new ImageIcon(this.getClass().getResource("logo.jpg")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(logoImg));
+		
 		lblNewLabel_2 = new JLabel("Delete my account");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Roboto", Font.BOLD, 16));
-		headPanel.add(lblNewLabel_2,BorderLayout.SOUTH);
-
-
-		JPanel centerPanel = new JPanel(new BorderLayout(5,5));
-		centerPanel.setBackground(Color.white);
-
+		lblNewLabel_2.setFont(new Font("Verdana", Font.BOLD, 16));
+		
 		JTextArea txtrAreYouSure = new JTextArea();
 		txtrAreYouSure.setWrapStyleWord(true);
-		txtrAreYouSure.setBackground(Color.white);
-		txtrAreYouSure.setFont(new Font("Roboto", Font.ITALIC, 13));
+		txtrAreYouSure.setBackground(new Color(240, 240, 240));
+		txtrAreYouSure.setFont(new Font("Verdana", Font.ITALIC, 13));
 		txtrAreYouSure.setLineWrap(true);
 		txtrAreYouSure.setEditable(false);
-		txtrAreYouSure.setText("Are you sure you want to remove your account from the library management system? " +
-				"Keep in mind that you won't be able to access your account again or retrieve any of the book's " +
-				"data added in Library Management System.");
-		centerPanel.add(txtrAreYouSure,BorderLayout.CENTER);
-
+		txtrAreYouSure.setText("Are you sure you want to remove your account from the library management system? Keep in mind that you won't be able to access your account again or retrieve any of the book's data added in Library Management System.");
+		
 		lblNewLabel_3 = new JLabel("If you would still like your account deleted, click \"Delete My Account\".");
-		lblNewLabel_3.setFont(new Font("Roboto", Font.ITALIC, 13));
-		centerPanel.add(lblNewLabel_3,BorderLayout.SOUTH);
-
-
-		JPanel buttonPanel = new JPanel(new BorderLayout());
-		buttonPanel.setBackground(Color.white);
-
-		JPanel buttonDelete = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		buttonDelete.setBackground(Color.white);
-		JButton btnNewButton = new JButton("Delete Account");
-		btnNewButton.setPreferredSize(new Dimension(150,40));
-		btnNewButton.setFont(new Font("Roboto", Font.BOLD, 15));
-		btnNewButton.setBackground(Color.RED);
-		btnNewButton.setBorderPainted(false);  // Tắt viền nút
-		btnNewButton.setFocusPainted(false);   // Tắt viền khi có focus
+		lblNewLabel_3.setFont(new Font("Verdana", Font.ITALIC, 13));
+		
+		JButton btnNewButton = new JButton("Delete My Account");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -134,52 +109,58 @@ public class DeleteUser extends JFrame {
 				}
 			}
 		});
-		buttonDelete.add(btnNewButton);
-		buttonPanel.add(buttonDelete,BorderLayout.NORTH);
-
-		JPanel cancelPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		cancelPanel.setBackground(Color.white);
+		btnNewButton.setBackground(new Color(70, 163, 255));
+		btnNewButton.setFont(new Font("Verdana", Font.BOLD, 13));
+		
 		btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setFocusPainted(false);
-		btnNewButton_1.setContentAreaFilled(false);
-		btnNewButton_1.setFont(new Font("Roboto",Font.PLAIN,15));
-		btnNewButton_1.setForeground(Color.BLACK);// Màu chữ ban đầu
-		// Thay đổi màu văn bản khi di chuột qua nút
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btnNewButton_1.setForeground(Color.BLUE);  // Màu chữ khi di chuột
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btnNewButton_1.setForeground(Color.BLACK);  // Trả lại màu chữ khi không di chuột
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				btnNewButton_1.setForeground(Color.RED);   // Màu chữ khi bấm
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				btnNewButton_1.setForeground(Color.BLUE);  // Màu chữ khi thả nút
-			}
-		});
-
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				setVisible(false);
 			}
 		});
-		cancelPanel.add(btnNewButton_1);
-		buttonPanel.add(cancelPanel,BorderLayout.CENTER);
-
-		contentPane.setLayout(new BorderLayout());
-		contentPane.add(headPanel,BorderLayout.NORTH);
-		contentPane.add(centerPanel,BorderLayout.CENTER);
-		contentPane.add(buttonPanel,BorderLayout.SOUTH);
+		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 13));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(txtrAreYouSure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+									.addGap(128)
+									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblNewLabel_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(20)
+							.addComponent(btnNewButton)
+							.addGap(32)
+							.addComponent(btnNewButton_1)))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel)
+						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+					.addGap(29)
+					.addComponent(txtrAreYouSure, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblNewLabel_3)
+					.addGap(27)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnNewButton)
+						.addComponent(btnNewButton_1))
+					.addContainerGap(32, Short.MAX_VALUE))
+		);
+		contentPane.setLayout(gl_contentPane);
 	}
 }

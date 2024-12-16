@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -12,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
@@ -29,12 +27,11 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import com.google.zxing.*;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.common.HybridBinarizer;
-
 import javax.swing.SwingConstants;
 public class AddNewBook extends JFrame {
 
@@ -75,11 +72,11 @@ public class AddNewBook extends JFrame {
 		for(int i=0;i<8;i++) 
 		{
 			int num=(int)(Math.random()*9)+1;
-			bookId= bookId + String.valueOf(num);
+			bookId=bookId+num;
 		}
 		System.out.println("QR Number is : "+bookId);
-		String url= bookId;
-		String path= "C:/Users/Hi/Pictures/QRBTL/" + url +".png";
+		String url=bookId;
+		String path="C:\\Users\\Shantam\\Desktop\\java\\libraryManagement\\qrCodes\\duplicateQR\\"+url+".png";
 		String charset="UTF-8";
 		try {
 			generateQRCode(url, path, charset, 100, 200);
@@ -98,7 +95,7 @@ public class AddNewBook extends JFrame {
 	//Generate QR-BarCode
 	public static void generateQRCode(String data,String path,String charset,int h,int w) throws WriterException, IOException 
 	{
-		BitMatrix bitMatrix=new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, w, h);
+		BitMatrix bitMatrix=new MultiFormatWriter().encode(data, BarcodeFormat.UPC_E, w, h);
 		MatrixToImageWriter.writeToPath(bitMatrix, path.substring(path.lastIndexOf('.')+1), Paths.get(path));
 	}
 	
@@ -159,7 +156,7 @@ public class AddNewBook extends JFrame {
 	{
 		textField.setText(codeNum());
 		String url=textField.getText();
-		String path= "C:/Users/Hi/Pictures/QRBTL/" +url+".png";
+		String path="C:\\Users\\Shantam\\Desktop\\java\\libraryManagement\\qrCodes\\duplicateQR\\"+url+".png";
 		String charset="UTF-8";
 		try {
 			generateQRCode(url, path, charset, 100, 200);
@@ -171,8 +168,8 @@ public class AddNewBook extends JFrame {
 			e1.printStackTrace();
 		}
 		System.out.println("QR Code Generated Successfully...");
-		ImageIcon imgIcon=new ImageIcon("C:/Users/Hi/Pictures/QRBTL/"+url+".png");
-		lblNewLabel_2.setIcon(imgIcon);
+		ImageIcon imgIcon=new ImageIcon("C:\\Users\\Shantam\\Desktop\\java\\libraryManagement\\qrCodes\\duplicateQR\\"+url+".png");
+		//lblNewLabel_2.setIcon(imgIcon);
 		Image img=imgIcon.getImage();
 		Image resize=img.getScaledInstance(200, 68, Image.SCALE_DEFAULT);
 		ImageIcon resizedImg=new ImageIcon(resize);
@@ -344,7 +341,7 @@ public class AddNewBook extends JFrame {
 		lblNewLabel_1_1_4_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnNewButton_1 = new JButton("Save");
-		Image img1=new ImageIcon("img/save-icon--1.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image img1=new ImageIcon(this.getClass().getResource("save-icon--1.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton_1.setIcon(new ImageIcon(img1));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -389,7 +386,7 @@ public class AddNewBook extends JFrame {
 						{
 			// Main QR-BarCode For Books
 							String url=textField.getText();
-							String path= "C:/Users/Hi/Pictures/QRBTL/" +url+".png";
+							String path="C:\\Users\\Shantam\\Desktop\\java\\libraryManagement\\qrCodes\\mainQR\\"+url+".png";
 							String charset="UTF-8";
 							try {
 								generateQRCode(url, path, charset, 100, 200);
@@ -402,11 +399,11 @@ public class AddNewBook extends JFrame {
 							}
 							System.out.println("QR Code Generated Successfully...");
 							JOptionPane.showMessageDialog(getParent(), "Book succesfully added.","Success",JOptionPane.INFORMATION_MESSAGE);		
-////							Convert Code to DigitalCode
+//							Convert Code to DigitalCode
 //							BinaryBitmap binaryBitmap=new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(ImageIO.read(new FileInputStream(path)))));
 //							Result res=new MultiFormatReader().decode(binaryBitmap);
 //							System.out.println("Decode the QR Code : "+res.getText());
-//							reset();
+							reset();
 					}
 					} else {
 						JOptionPane.showMessageDialog(getParent(), "Book not Added.","Error",JOptionPane.ERROR_MESSAGE);
@@ -418,7 +415,7 @@ public class AddNewBook extends JFrame {
 		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnNewButton_1_1 = new JButton("Reset");
-		Image resetIcon=new ImageIcon("img/resetIcon.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image resetIcon=new ImageIcon(this.getClass().getResource("resetIcon.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton_1_1.setIcon(new ImageIcon(resetIcon));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -429,7 +426,7 @@ public class AddNewBook extends JFrame {
 		btnNewButton_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnNewButton_1_2 = new JButton("Cancel");
-		Image img=new ImageIcon("img/red-x-mark-transparent-background-3.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image img=new ImageIcon(this.getClass().getResource("red-x-mark-transparent-background-3.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton_1_2.setIcon(new ImageIcon(img));
 		btnNewButton_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -441,14 +438,14 @@ public class AddNewBook extends JFrame {
 	//Waste QR-BarCode;	
 		lblNewLabel_2 = new JLabel("");
 		String id=textField.getText();
-		ImageIcon imgIcon=new ImageIcon("C:/Users/Hi/Pictures/QRBTL/"+id+".png");
+		ImageIcon imgIcon=new ImageIcon("C:\\Users\\Shantam\\Desktop\\java\\libraryManagement\\qrCodes\\duplicateQR\\"+id+".png");
 		//lblNewLabel_2.setIcon(imgIcon);
 		Image img11=imgIcon.getImage();
 		Image resize=img11.getScaledInstance(200, 68, Image.SCALE_DEFAULT);
 		ImageIcon resizedImg=new ImageIcon(resize);
 		lblNewLabel_2.setIcon(resizedImg);
-		Image logoImg=new ImageIcon("img/logo.jpg").getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
-		lblNewLabel_2.setIcon(new ImageIcon(logoImg));
+//		Image logoImg=new ImageIcon(this.getClass().getResource("logo.jpg")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+//		lblNewLabel_2.setIcon(new ImageIcon(logoImg));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);

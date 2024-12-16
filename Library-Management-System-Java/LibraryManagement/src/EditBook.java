@@ -63,7 +63,7 @@ public class EditBook extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	Image img2=new ImageIcon("img/logo.jpg").getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+	Image img2=new ImageIcon(this.getClass().getResource("logo.jpg")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 	public void reset() 
 	{
 		textField.setText(null);
@@ -134,7 +134,7 @@ public class EditBook extends JFrame {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				ImageIcon imgIcon=new ImageIcon("C:/Users/Hi/Pictures/QRBTL/"+id+".png");
+				ImageIcon imgIcon=new ImageIcon("C:\\Users\\Shantam\\Desktop\\java\\libraryManagement\\qrCodes\\mainQR\\"+id+".png");
 				Image img=imgIcon.getImage();
 				Image resize=img.getScaledInstance(200, 68, Image.SCALE_DEFAULT);
 				ImageIcon resizedImg=new ImageIcon(resize);
@@ -190,7 +190,7 @@ public class EditBook extends JFrame {
 		lblNewLabel_1_1_4_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnNewButton_1 = new JButton("Search");
-		Image searchIcon=new ImageIcon("img/search.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image searchIcon=new ImageIcon(this.getClass().getResource("search.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton_1.setIcon(new ImageIcon(searchIcon));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -228,7 +228,7 @@ public class EditBook extends JFrame {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				ImageIcon imgIcon=new ImageIcon("C:/Users/Hi/Pictures/QRBTL/"+id+".png");
+				ImageIcon imgIcon=new ImageIcon("C:\\Users\\Shantam\\Desktop\\java\\libraryManagement\\qrCodes\\"+id+".png");
 				//lblNewLabel_2.setIcon(imgIcon);
 				Image img=imgIcon.getImage();
 				Image resize=img.getScaledInstance(200, 68, Image.SCALE_DEFAULT);
@@ -244,7 +244,7 @@ public class EditBook extends JFrame {
 		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnNewButton_1_1 = new JButton("Update");
-		Image updateIcon=new ImageIcon("img/update.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image updateIcon=new ImageIcon(this.getClass().getResource("update.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton_1_1.setIcon(new ImageIcon(updateIcon));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -301,7 +301,7 @@ public class EditBook extends JFrame {
 		btnNewButton_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnNewButton_1_1_1 = new JButton("Delete");
-		Image deleteIcon=new ImageIcon("img/deleteIcon.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image deleteIcon=new ImageIcon(this.getClass().getResource("deleteIcon.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton_1_1_1.setIcon(new ImageIcon(deleteIcon));
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -327,7 +327,7 @@ public class EditBook extends JFrame {
 					{
 						JOptionPane.showMessageDialog(getParent(), "Book successfully deleted","Success",JOptionPane.INFORMATION_MESSAGE);
 						Path imagesPath = Paths.get(
-								"C:/Users/Hi/Pictures/QRBTL/"+id+".png");
+								"C:\\Users\\Shantam\\Desktop\\java\\libraryManagement\\qrCodes\\mainQR\\"+id+".png");
 						try {
 							Files.delete(imagesPath);
 						} catch (IOException e1) {
@@ -342,7 +342,7 @@ public class EditBook extends JFrame {
 		btnNewButton_1_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnNewButton_1_1_2 = new JButton("Cancel");
-		Image cancelIcon=new ImageIcon("img/red-x-mark-transparent-background-3.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image cancelIcon=new ImageIcon(this.getClass().getResource("red-x-mark-transparent-background-3.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnNewButton_1_1_2.setIcon(new ImageIcon(cancelIcon));
 		btnNewButton_1_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 

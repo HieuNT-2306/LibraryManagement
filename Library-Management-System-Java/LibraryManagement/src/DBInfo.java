@@ -11,7 +11,7 @@ public class DBInfo
 	static
 	{
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Driver Loaded...");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -21,7 +21,7 @@ public class DBInfo
 	{
 		Connection con=null;
 		try {
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement","root","Duocvl2024!");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagement","root","rat");
 			System.out.println("Connection Established...");
 		} catch (SQLException e) {
 			e.printStackTrace();
