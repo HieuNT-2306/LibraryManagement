@@ -82,7 +82,7 @@ public class ReturnBook extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("");
-		Image clgLogo=new ImageIcon(this.getClass().getResource("logo.jpg")).getImage();
+		Image clgLogo=new ImageIcon("img/logo.jpg").getImage();
 		lblNewLabel.setIcon(new ImageIcon(clgLogo));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		

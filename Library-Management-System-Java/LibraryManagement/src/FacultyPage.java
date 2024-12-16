@@ -48,11 +48,11 @@ public class FacultyPage extends JFrame {
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(4, 2, 0, 0));
-		Image img=new ImageIcon(this.getClass().getResource("/member-add-on-300x300.png")).getImage();
+		Image img=new ImageIcon("img/member-add-on-300x300.png").getImage();
 		
 		JLabel lblNewLabel_1 = new JLabel();
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		Image img01=new ImageIcon(this.getClass().getResource("logoMain.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+		Image img01=new ImageIcon("img/logoMain.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		lblNewLabel_1.setIcon(new ImageIcon(img01));
 		contentPane.add(lblNewLabel_1);
 		
@@ -60,8 +60,8 @@ public class FacultyPage extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 25));
 		contentPane.add(lblNewLabel);
-		Image img1=new ImageIcon(this.getClass().getResource("/New book.png")).getImage();
-		Image img6=new ImageIcon(this.getClass().getResource("editUser.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+		Image img1=new ImageIcon("img/New book.png").getImage();
+		Image img6=new ImageIcon("img/editUser.png").getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 		
 		JButton btnNewButton_8 = new JButton("View Users");
 		btnNewButton_8.addActionListener(new ActionListener() {
@@ -70,7 +70,7 @@ public class FacultyPage extends JFrame {
 				new ViewUser().setVisible(true);
 			}
 		});
-		Image img7=new ImageIcon(this.getClass().getResource("viewUser.png")).getImage().getScaledInstance(65, 60, Image.SCALE_DEFAULT);
+		Image img7=new ImageIcon("img/viewUser.png").getImage().getScaledInstance(65, 60, Image.SCALE_DEFAULT);
 		
 		JButton btnNewButton_1 = new JButton("Add New Book");
 		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 15));
@@ -108,7 +108,7 @@ public class FacultyPage extends JFrame {
 				new EditBook().setVisible(true);
 			}
 		});
-		Image img2=new ImageIcon(this.getClass().getResource("editBook.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+		Image img2=new ImageIcon("img/editBook.png").getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 		btnNewButton_2.setIcon(new ImageIcon(img2));
 		contentPane.add(btnNewButton_2);
 		
@@ -150,10 +150,10 @@ public class FacultyPage extends JFrame {
 			}
 		});
 		btnNewButton_3.setFont(new Font("Verdana", Font.PLAIN, 15));
-		Image img3=new ImageIcon(this.getClass().getResource("issue.png")).getImage();
+		Image img3=new ImageIcon("img/issue.png").getImage();
 		btnNewButton_3.setIcon(new ImageIcon(img3));
 		contentPane.add(btnNewButton_3);
-		Image img4=new ImageIcon(this.getClass().getResource("viewBooks.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+		Image img4=new ImageIcon("img/viewBooks.png").getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		btnNewButton_5.setIcon(new ImageIcon(img4));
 		JButton btnNewButton_4 = new JButton("Edit Credincial");
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -162,7 +162,7 @@ public class FacultyPage extends JFrame {
 				new PasswordCheck().setVisible(true);
 			}
 		});
-		Image img5=new ImageIcon(this.getClass().getResource("setting.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+		Image img5=new ImageIcon("img/setting.png").getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		
 		JButton btnNewButton_6 = new JButton("Add Notice");
 		btnNewButton_6.addActionListener(new ActionListener() {
@@ -171,11 +171,11 @@ public class FacultyPage extends JFrame {
 				new EditNotice().setVisible(true);
 			}
 		});
-		Image img8=new ImageIcon(this.getClass().getResource("notice.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+		Image img8=new ImageIcon("img/notice.png").getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		btnNewButton_6.setIcon(new ImageIcon(img8));
 		btnNewButton_6.setFont(new Font("Verdana", Font.PLAIN, 15));
 		contentPane.add(btnNewButton_6);
-		Image img9=new ImageIcon(this.getClass().getResource("Statics.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+		Image img9=new ImageIcon("img/Statics.png").getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 		btnNewButton.setIcon(new ImageIcon(img9));
 		
 		JButton btnNewButton_7 = new JButton("Return Book");
@@ -185,7 +185,7 @@ public class FacultyPage extends JFrame {
 				new ReturnBook().setVisible(true);
 			}
 		});
-		Image img10=new ImageIcon(this.getClass().getResource("return-book-1-560407.png")).getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+		Image img10=new ImageIcon("img/return-book-1-560407.png").getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
 		btnNewButton_7.setIcon(new ImageIcon(img10));
 		btnNewButton_7.setFont(new Font("Verdana", Font.PLAIN, 15));
 		contentPane.add(btnNewButton_7);

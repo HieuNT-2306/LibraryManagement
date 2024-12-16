@@ -127,7 +127,7 @@ public class IssueBooks extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("");
-		Image clgLogo=new ImageIcon(this.getClass().getResource("logo.jpg")).getImage();
+		Image clgLogo=new ImageIcon("img/logo.jpg").getImage();
 		lblNewLabel.setIcon(new ImageIcon(clgLogo));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -237,7 +237,7 @@ public class IssueBooks extends JFrame {
 		lblNewLabel_3_1_1_1_1.setFont(new Font("Verdana", Font.PLAIN, 13));
 		
 		JButton btnIssue = new JButton("Issue");
-		Image issueIcon=new ImageIcon(this.getClass().getResource("issue book.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image issueIcon=new ImageIcon("img/issue book.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnIssue.setIcon(new ImageIcon(issueIcon));
 		
 		btnIssue.addActionListener(new ActionListener() {
@@ -341,7 +341,7 @@ public class IssueBooks extends JFrame {
 		btnIssue.setFont(new Font("Verdana", Font.PLAIN, 14));
 		
 		JButton btnCancel = new JButton("Cancel");
-		Image cancelIcon=new ImageIcon(this.getClass().getResource("red-x-mark-transparent-background-3.png")).getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
+		Image cancelIcon=new ImageIcon("img/red-x-mark-transparent-background-3.png").getImage().getScaledInstance(13, 17, Image.SCALE_DEFAULT);
 		btnCancel.setIcon(new ImageIcon(cancelIcon));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)

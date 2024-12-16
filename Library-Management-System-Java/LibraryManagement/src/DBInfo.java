@@ -8,15 +8,15 @@
 	
 	public class DBInfo 
 	{
-		static
+    static
 		{
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				System.out.println("Driver Loaded...");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        System.out.println("Driver Loaded...");
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      }
+	  }
 		public static Connection conn() 
 		{
 			Connection con=null;
