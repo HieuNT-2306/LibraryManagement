@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,9 +9,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
@@ -18,146 +16,148 @@ import javax.swing.SwingConstants;
 
 public class ViewUser extends JFrame {
 
-	private JPanel contentPane;
-	private JTable table;
+    private JPanel contentPane;
+    private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewUser frame = new ViewUser();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    ViewUser frame = new ViewUser();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public ViewUser() {
-		setResizable(false);
-		setTitle("View Users");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 628, 344);
-		setLocationRelativeTo(this);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    public ViewUser() {
+        // Cấu hình cơ bản cho frame
+        setResizable(false);
+        setTitle("View Users");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 628, 400); // Tăng chiều cao để chứa nút Cancel
+        setLocationRelativeTo(this);
 
-		setContentPane(contentPane);
-		
-		JLabel lblNewLabel = new JLabel("View Users");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 16));
-		
-		JButton btnNewButton = new JButton("Admin");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				String name=e.getActionCommand();
-				JFrame frame=new JFrame();
-				
-				frame.setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-				frame.setVisible(true);
-				frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				try {
-					DBInfo.viewLibrarians(name);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				table=new JTable(DBInfo.outerVector2,DBInfo.colsName2);
-				JScrollPane pane=new JScrollPane(table);
-				frame.getContentPane().add(pane);
-			}
-		});
-		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 15));
-		
-		JButton btnStudent = new JButton("Student");
-		btnStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				String name=e.getActionCommand();
-				JFrame frame=new JFrame();
-				
-				frame.setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-				frame.setVisible(true);
-				frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				try {
-					DBInfo.viewLibrarians(name);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				table=new JTable(DBInfo.outerVector2,DBInfo.colsName2);
-				JScrollPane pane=new JScrollPane(table);
-				frame.getContentPane().add(pane);
-			}
-		});
-		btnStudent.setFont(new Font("Verdana", Font.PLAIN, 15));
-		
-		JLabel lblNewLabel_2 = new JLabel("Account Type");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Verdana", Font.ITALIC, 13));
-		
-		JButton btnFaculty = new JButton("Faculty");
-		btnFaculty.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				String name=e.getActionCommand();
-				JFrame frame=new JFrame();
-				
-				frame.setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-				frame.setVisible(true);
-				frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				try {
-					DBInfo.viewLibrarians(name);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				table=new JTable(DBInfo.outerVector2,DBInfo.colsName2);
-				JScrollPane pane=new JScrollPane(table);
-				frame.getContentPane().add(pane);
-			}
-		});
-		btnFaculty.setFont(new Font("Verdana", Font.PLAIN, 15));
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(44)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnFaculty, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-					.addComponent(btnStudent, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-					.addGap(36))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(31)
-					.addComponent(lblNewLabel)
-					.addGap(18)
-					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addGap(44)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnStudent, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnFaculty, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(93, Short.MAX_VALUE))
-		);
-		contentPane.setLayout(gl_contentPane);
-	}
+        // Content Pane
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(new Color(240, 248, 255)); // Màu nền xanh nhạt
+        setContentPane(contentPane);
+
+        // Tiêu đề chính
+        JLabel lblNewLabel = new JLabel("View Users");
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 18));
+        lblNewLabel.setForeground(new Color(25, 25, 112)); // Màu chữ đậm
+
+        // Tiêu đề phụ
+        JLabel lblNewLabel_2 = new JLabel("Account Type");
+        lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel_2.setFont(new Font("Verdana", Font.ITALIC, 13));
+        lblNewLabel_2.setForeground(new Color(70, 130, 180)); // Màu chữ
+
+        // Nút Admin
+        JButton btnAdmin = createGreenButton("Admin");
+        btnAdmin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openUserFrame(e.getActionCommand());
+            }
+        });
+
+        // Nút Faculty
+        JButton btnFaculty = createGreenButton("Faculty");
+        btnFaculty.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openUserFrame(e.getActionCommand());
+            }
+        });
+
+        // Nút Student
+        JButton btnStudent = createGreenButton("Student");
+        btnStudent.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openUserFrame(e.getActionCommand());
+            }
+        });
+
+        // Nút Cancel
+        JButton btnCancel = new JButton("Cancel");
+        btnCancel.setFont(new Font("Verdana", Font.PLAIN, 13)); 
+        btnCancel.setFocusPainted(false);
+        btnCancel.setContentAreaFilled(false);
+        btnCancel.setBorderPainted(false);
+        btnCancel.setForeground(Color.BLACK);
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Đóng cửa sổ hiện tại
+            }
+        });
+        // Hiệu ứng hover cho Cancel 
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancel.setForeground(new Color(30, 144, 255)); 
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancel.setForeground(Color.BLACK); 
+            }
+        });
+
+        // Group Layout cho Content Pane
+        contentPane.setLayout(null);
+        lblNewLabel.setBounds(10, 20, 594, 30);
+        lblNewLabel_2.setBounds(10, 60, 594, 20);
+        btnAdmin.setBounds(70, 120, 140, 60);
+        btnFaculty.setBounds(240, 120, 140, 60);
+        btnStudent.setBounds(410, 120, 140, 60);
+        btnCancel.setBounds(270, 280, 80, 30); // Nút Cancel ở giữa phía dưới
+
+        contentPane.add(lblNewLabel);
+        contentPane.add(lblNewLabel_2);
+        contentPane.add(btnAdmin);
+        contentPane.add(btnFaculty);
+        contentPane.add(btnStudent);
+        contentPane.add(btnCancel);
+    }
+
+    // Phương thức mở Frame hiển thị dữ liệu
+    private void openUserFrame(String accountType) {
+        JFrame frame = new JFrame(accountType + " Users");
+        frame.setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        try {
+            DBInfo.viewLibrarians(accountType);
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        table = new JTable(DBInfo.outerVector2, DBInfo.colsName2);
+        JScrollPane pane = new JScrollPane(table);
+        frame.getContentPane().add(pane);
+    }
+
+    // Phương thức tạo các nút màu xanh lá
+    private JButton createGreenButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Verdana", Font.PLAIN, 15));
+        button.setFocusPainted(false);
+        button.setBackground(new Color(0, 255, 0)); 
+        button.setForeground(Color.BLACK); 
+        button.setBorderPainted(false);
+        button.setOpaque(true);
+
+        // Hiệu ứng hover
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0, 200, 0)); 
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0, 255, 0)); 
+            }
+        });
+        return button;
+    }
 }
